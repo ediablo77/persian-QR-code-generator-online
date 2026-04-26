@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    
+    <!-- تگ‌های سئو (SEO) -->
+    <title>ساخت کیو آر کد حرفه‌ای آنلاین | رایگان و سریع | QR Code Generator</title>
+    <meta name="description" content="ابزار حرفه‌ای ساخت کیو آر کد با پشتیبانی از متن، لینک، تلفن، واتساپ و وایفای. کاملاً رایگان، سبک و سریع با قابلیت تغییر اندازه QR کد.">
+    <meta name="keywords" content="ساخت کیو آر کد,qr code generator,ساخت qr کد رایگان,کیو آر کد واتساپ,qr code wifi,ساخت بارکد دومینو,تبدیل متن به qr کد">
+    <meta name="author" content="Adsio.IR کیو آر کد آنلاین">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="Persian">
+    <meta name="revisit-after" content="7 days">
+    <meta name="theme-color" content="#1f4e8c">
+    
+    <!-- تگ‌های Open Graph برای شبکه‌های اجتماعی -->
+    <meta property="og:title" content="ساخت کیو آر کد حرفه‌ای آنلاین | رایگان و سریع">
+    <meta property="og:description" content="ابزار کامل ساخت QR کد با پشتیبانی از متن، لینک، تلفن، واتساپ و وایفای - کاملاً رایگان">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:site_name" content="کیو آر کد آنلاین">
+    
+    <!-- تگ‌های Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ساخت کیو آر کد حرفه‌ای آنلاین">
+    <meta name="twitter:description" content="ابزار کامل ساخت QR کد - رایگان، سریع و حرفه‌ای">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://qr.adsio.ir/">
+    
+    <!-- favicon ساده (اموجی) -->
+			<link rel="icon" href="fav.png" sizes="32x32" />    
+    <!-- Bootstrap 5 CSS (CDN بهینه) -->
+    <link href="./bootstrap.min.css" rel="stylesheet">
+    
+    <!-- کتابخانه QRCode -->
+    <script src="./qrcode.min.js"></script>
+    
+    <style>
+        /* فونت وزیر برای نمایش بهتر فارسی */
+@font-face {
+    font-family: 'Vazir';
+    src: url('fonts/webfonts/Vazirmatn[wght].woff2') format('woff2-variations'),
+         url('fonts/webfonts/Vazirmatn[wght].woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+    font-family: 'Vazir', 'Segoe UI', 'Tahoma', 'IranSans', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #f6f9fc 0%, #ecf2f9 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        /* بهینه‌سازی Core Web Vitals */
+        .card {
+            border: none;
+            border-radius: 2rem;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            will-change: transform;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+        }
+        .card-header {
+            background: transparent;
+            border-bottom: 1px solid #eef2f8;
+            padding: 1.5rem 1.8rem 0.8rem;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #1e2f4e;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #2c3e66;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+        .btn-group-custom {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+        .btn-mode {
+            border-radius: 3rem;
+            padding: 0.55rem 1.2rem;
+            font-weight: 500;
+            border: 1px solid #cfdfed;
+            background: white;
+            color: #1f3a5f;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .btn-mode.active {
+            background: #1f4e8c;
+            border-color: #1f4e8c;
+            color: white;
+            box-shadow: 0 6px 12px -8px #1f4e8c60;
+        }
+        .btn-mode:hover:not(.active) {
+            background: #e9f0f7;
+            border-color: #bdd4e8;
+        }
+        .qr-container {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03), 0 8px 20px rgba(0,0,0,0.05);
+        }
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 220px;
+        }
+        #qrcode canvas, #qrcode img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .size-control {
+            background: #f8fafd;
+            border-radius: 2rem;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+        }
+        .form-range {
+            direction: ltr;
+        }
+        .btn-download {
+            background: #27ae60;
+            border: none;
+            border-radius: 3rem;
+            padding: 0.7rem 1.4rem;
+            font-weight: 600;
+            color: white;
+            transition: 0.2s;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn-download:hover {
+            background: #219653;
+            transform: scale(0.98);
+            box-shadow: 0 5px 12px rgba(39,174,96,0.3);
+        }
+        .btn-download:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .footer-note {
+            font-size: 0.75rem;
+            color: #6c7e97;
+            border-top: 1px dashed #dee6ef;
+            text-align: center;
+            padding-top: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        input, select, textarea {
+            border-radius: 1.2rem !important;
+            border: 1px solid #dce5f0 !important;
+            padding: 0.6rem 1rem !important;
+            background: #fefefe;
+            font-size: 0.9rem;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #3c7fc8 !important;
+            box-shadow: 0 0 0 3px rgba(60,127,200,0.2) !important;
+            outline: none;
+        }
+        /* دکمه ساخت */
+        .btn-primary {
+            background: #1f4e8c;
+            border: none;
+            transition: 0.2s;
+        }
+        .btn-primary:hover {
+            background: #0e3a6b;
+            transform: scale(0.98);
+        }
+        @media (max-width: 576px) {
+            .card-header {
+                font-size: 1.3rem;
+                padding: 1rem 1.2rem 0rem;
+            }
+            .btn-mode {
+                padding: 0.4rem 1rem;
+                font-size: 0.75rem;
+            }
+        }
+        /* بهینه‌سازی سرعت بارگذاری */
+        .lazy-load {
+            content-visibility: auto;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9 col-12">
+                <!-- هدر صفحه برای سئو -->
+                <h1 class="visually-hidden">ساخت کیو آر کد حرفه‌ای و رایگان</h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <span aria-label="QR Code Generator">📱 سازنده حرفه‌ای کیو آر کد</span>
+                    </div>
+                    <div class="card-body p-4 p-md-5">
+
+                        <!-- دکمه‌های حالت‌ها با aria-label برای دسترسی‌پذیری -->
+                        <div class="btn-group-custom" role="group" aria-label="انتخاب نوع محتوای کیو آر کد">
+                            <button class="btn-mode active" data-mode="text" id="btnTextMode" aria-label="ساخت QR کد متن">
+                                📝 متن
+                            </button>
+                            <button class="btn-mode" data-mode="url" id="btnUrlMode" aria-label="ساخت QR کد لینک">
+                                🔗 لینک
+                            </button>
+                            <button class="btn-mode" data-mode="phone" id="btnPhoneMode" aria-label="ساخت QR کد تلفن">
+                                📞 تلفن
+                            </button>
+                            <button class="btn-mode" data-mode="whatsapp" id="btnWhatsappMode" aria-label="ساخت QR کد واتساپ">
+                                💬 واتساپ
+                            </button>
+                            <button class="btn-mode" data-mode="wifi" id="btnWifiMode" aria-label="ساخت QR کد وایفای">
+                                📶 وایفای
+                            </button>
+                        </div>
+
+                        <!-- فرم‌های داینامیک -->
+                        <div id="dynamicFormArea">
+                            <div id="textModeForm">
+                                <div class="mb-4">
+                                    <label class="form-label" for="textData">📄 متن دلخواه</label>
+                                    <textarea class="form-control" rows="3" id="textData" placeholder="متن خود را وارد کنید... مثلاً: سلام دوستان!"></textarea>
+                                </div>
+                            </div>
+                            <div id="urlModeForm" style="display: none;">
+                                <div class="mb-4">
+                                    <label class="form-label" for="urlData">🌐 آدرس لینک (URL)</label>
+                                    <input type="url" class="form-control" id="urlData" placeholder="https://www.google.com">
+                                </div>
+                            </div>
+                            <div id="phoneModeForm" style="display: none;">
+                                <div class="mb-4">
+                                    <label class="form-label" for="phoneData">📱 شماره تلفن</label>
+                                    <input type="tel" class="form-control" id="phoneData" placeholder="مثال : 09123456789">
+                                </div>
+                            </div>
+                            <div id="whatsappModeForm" style="display: none;">
+                                <div class="mb-3">
+                                    <label class="form-label" for="whatsappNumber">💬 شماره واتساپ</label>
+                                    <input type="tel" class="form-control" id="whatsappNumber" placeholder="مثال : 989123456789">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="whatsappMessage">✏️ متن پیام (اختیاری)</label>
+                                    <input type="text" class="form-control" id="whatsappMessage" placeholder="متن پیام...">
+                                </div>
+                            </div>
+                            <div id="wifiModeForm" style="display: none;">
+                                <div class="mb-3">
+                                    <label class="form-label" for="wifiSsid">📡 نام شبکه (SSID)</label>
+                                    <input type="text" class="form-control" id="wifiSsid" placeholder="نام وایفای">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="wifiPassword">🔑 رمز عبور</label>
+                                    <input type="text" class="form-control" id="wifiPassword" placeholder="رمز وایفای">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label" for="wifiEncryption">🛡️ نوع رمزگذاری</label>
+                                    <select class="form-select" id="wifiEncryption">
+                                        <option value="WPA">WPA/WPA2</option>
+                                        <option value="WEP">WEP</option>
+                                        <option value="nopass">بدون رمز</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- کنترل اندازه -->
+                        <div class="size-control">
+                            <label class="form-label d-flex justify-content-between">
+                                <span>📏 اندازه QR کد (پیکسل)</span>
+                                <span id="sizeValue" class="badge bg-primary rounded-pill">300</span>
+                            </label>
+                            <input type="range" class="form-range" id="qrSizeSlider" min="150" max="600" step="10" value="300" aria-label="تنظیم اندازه کیو آر کد">
+                            <div class="form-text text-muted small">👉 اسلایدر را حرکت دهید تا اندازه کیوآر کد تغییر کند</div>
+                        </div>
+
+                        <!-- دکمه‌ها -->
+                        <div class="row mt-2 g-3 align-items-end">
+                            <div class="col-md-7">
+                                <button id="generateBtn" class="btn btn-primary w-100 py-2 rounded-pill shadow-sm" aria-label="ساخت کیو آر کد">
+                                    ✨ ساخت کیو آر کد
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <button id="downloadBtn" class="btn-download" aria-label="دانلود کیو آر کد">
+                                    💾 دانلود (با اندازه انتخابی)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- نمایش QR -->
+                        <div class="qr-container mt-4 p-3">
+                            <div id="qrcode" aria-label="نمایش کیو آر کد ساخته شده"></div>
+                            <p class="small text-muted mt-2 mb-0">💡 اندازه QR بر اساس اسلایدر تغییر می‌کند</p>
+                        </div>
+                        
+<div class="footer-note">
+    <div>📱 پشتیبانی از متن، لینک، تلفن، واتساپ، وایفای + تغییر اندازه حرفه‌ای</div>
+    <div class="mt-2">
+        تمامی حقوق محفوظ است | ساخته شده با ❤️ توسط 
+        <a href="https://ez7.ir/" target="_blank" rel="noopener noreferrer" style="color: #1f4e8c; text-decoration: none; font-weight: 500;">ایزی سون</a>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- دیتای ساختاریافته JSON-LD برای سئو پیشرفته -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "سازنده حرفه‌ای کیو آر کد",
+    "alternateName": "ADSIO.IR QR Code Generator",
+    "description": "ابزار رایگان و حرفه‌ای ساخت کیو آر کد با پشتیبانی از متن، لینک، تلفن، واتساپ، وایفای و قابلیت تغییر اندازه",
+    "url": "https://qr.adsio.ir/",
+    "applicationCategory": "Utility",
+    "operatingSystem": "All",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "inLanguage": "fa",
+    "creator": {
+        "@type": "Organization",
+        "name": "کیو آر کد آنلاین"
+    },
+    "featureList": "ساخت QR کد از متن, ساخت QR کد از لینک, ساخت QR کد از شماره تلفن, ساخت QR کد واتساپ, ساخت QR کد وایفای, تغییر اندازه QR کد"
+}
+</script>
+    <script src="./script.js"></script>
+</body>
+</html>
